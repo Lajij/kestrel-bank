@@ -15,7 +15,7 @@ export async function GET(
 
   const { id } = await ctx.params;
   const account = getAccountById(id);
-  if (!account) {
+  if (!account || account.ownerId !== session) {
     return NextResponse.json({ error: "Account not found" }, { status: 404 });
   }
 
